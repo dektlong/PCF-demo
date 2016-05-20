@@ -2,7 +2,7 @@
 applications:
 - name: bestretail
   host: bestretail-random-word
-  instances: 5
+  instances: 3
   path: ./target/pcfdemo.war
   services: 
   - bestretail-stream
