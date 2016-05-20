@@ -11,7 +11,7 @@ params:
   CF_MANIFEST_HOST:
 
 inputs:
-  - name: pcfdemo
+  - name: bestretail
   - name: candidate-release
   - name: version
 
@@ -19,12 +19,12 @@ outputs:
   - name: prepare-integration
 
 run:
-  path: pcfdemo/ci/tasks/prepare-integration.sh
+  path: bestretail/ci/tasks/prepare-integration.sh
   args: [
     --input-dir, candidate-release,
     --output-dir, prepare-integration,
     --version-file, version/number,
-    --input-manifest, pcfdemo/manifest.yml,
-    --artifactId, pcf-demo,
+    --input-manifest, bestretail/manifest.yml,
+    --artifactId, bestretail,
     --packaging, war
   ]
