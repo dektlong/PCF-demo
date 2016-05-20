@@ -1,6 +1,6 @@
 #!/bin/bash
 
-baseName="pcf-demo"
+baseName="bestretail"
 
 inputDir=     # required
 outputDir=    # required
