@@ -15,7 +15,7 @@ inputs:
   - name: bestretail
 
 run:
-  path: pcfdemo/ci/tasks/unit.sh
+  path: bestretail/ci/tasks/unit.sh
   args: [
     --input-dir, bestretail
   ]
