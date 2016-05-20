@@ -8,10 +8,10 @@ image_resource:
     tag: '8'
 
 inputs:
-  - name: pcfdemo
+  - name: bestretail
 
 run:
-  path: pcfdemo/ci/tasks/integration.sh
+  path: bestretail/ci/tasks/integration.sh
   args: [
-    --input-dir, pcfdemo
+    --input-dir, bestretail
   ]
