@@ -12,10 +12,10 @@ params:
   MAVEN_CONFIG:
 
 inputs:
-  - name: pcfdemo
+  - name: bestretail
 
 run:
   path: pcfdemo/ci/tasks/unit.sh
   args: [
-    --input-dir, pcfdemo
+    --input-dir, bestretail
   ]
