@@ -5,3 +5,5 @@ applications:
   instances: 1
   host: pcfdemo-yourname
   path: ./target/pcfdemo.war
+services:
+  bestretail-stream
