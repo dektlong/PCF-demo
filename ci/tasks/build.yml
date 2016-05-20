@@ -12,18 +12,18 @@ params:
   MAVEN_CONFIG:
 
 inputs:
-  - name: pcfdemo
+  - name: bestretail
   - name: version
 
 outputs:
   - name: build
 
 run:
-  path: pcfdemo/ci/tasks/build.sh
+  path: bestretail/ci/tasks/build.sh
   args: [
-    --input-dir, pcfdemo,
+    --input-dir, bestretail,
     --output-dir, build,
     --version-file, version/number,
-    --artifactId, pcf-demo,
+    --artifactId, bestretail,
     --packaging, war
   ]
