@@ -49,3 +49,17 @@ outputWar="${outputDir}/${baseName}.war"
 echo "Renaming ${inputWar} to ${outputWar}"
 
 cp ${inputWar} ${outputWar}
+
+# copy the manifest to the output directory and process it
+outputManifest=$outputDir/manifest.yml
+
+cp $inputManifest $outputManifest
+
+# the path in the manifest is always relative to the manifest itself
+sed -i -- "s|path: .*$|path: $artifactName|g" $outputManifest
+
+if [ ! -z "$hostname" ]; then
+  sed -i "s|host: .*$|host: ${hostname}|g" $outputManifest
+fi
+
+cat $outputManifest
