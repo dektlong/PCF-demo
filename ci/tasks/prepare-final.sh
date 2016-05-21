@@ -21,6 +21,10 @@ while [ $# -gt 0 ]; do
       versionFile=$2
       shift
       ;;
+    -f | --input-manifest )
+      inputManifest=$2
+      shift
+      ;;
     * )
       echo "Unrecognized option: $1" 1>&2
       exit 1
