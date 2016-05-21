@@ -4,6 +4,7 @@ baseName="bestretail"
 
 inputDir=     # required
 outputDir=    # required
+input-manifest= #required 
 versionFile=  # optional
 
 while [ $# -gt 0 ]; do
