@@ -16,10 +16,12 @@ outputs:
   - name: prepare-final
 
 run:
-  path: bestretail/ci/tasks/prepare-final.sh
+  path: bestretail/ci/tasks/prepare-integration.sh
   args: [
-    "--input-dir", "candidate-release",
-    "--output-dir", "prepare-final",
-    "--version-file", "version/number",
-    "--input-manifest", "bestretail/manifest.yml"
+    --input-dir, candidate-release,
+    --output-dir, prepare-final,
+    --version-file, version/number,
+    --input-manifest, bestretail/manifest.yml,
+    --artifactId, bestretail,
+    --packaging, war
   ]
