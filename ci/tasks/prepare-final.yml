@@ -21,5 +21,5 @@ run:
     "--input-dir", "candidate-release",
     "--output-dir", "prepare-final",
     "--version-file", "version/number",
-    "-input-manifest", "bestretail/manifest.yml"
+    "--input-manifest", "bestretail/manifest.yml"
   ]
