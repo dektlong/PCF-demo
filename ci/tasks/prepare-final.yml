@@ -16,7 +16,7 @@ outputs:
   - name: prepare-final
 
 run:
-  path: bestretail/ci/tasks/prepare-integration.sh
+  path: bestretail/ci/tasks/prepare-final.sh
   args: [
     --input-dir, candidate-release,
     --output-dir, prepare-final,
