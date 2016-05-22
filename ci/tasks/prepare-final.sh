@@ -1,11 +1,10 @@
 #!/bin/bash
 
-baseName="bestretail"
+# required
+inputDir=  outputDir=  inputManifest=  versionFile=  artifactId=  packaging=
 
-inputDir=     # required
-outputDir=    # required
-inputManifest= #required 
-versionFile=  # optional
+# optional
+hostname=$CF_MANIFEST_HOST # default to env variable from pipeline
 
 while [ $# -gt 0 ]; do
   case $1 in
@@ -25,6 +24,18 @@ while [ $# -gt 0 ]; do
       inputManifest=$2
       shift
       ;;
+    -a | --artifactId )
+      artifactId=$2
+      shift
+      ;;
+    -p | --packaging )
+      packaging=$2
+      shift
+      ;;
+    -n | --hostname )
+      hostname=$2
+      shift
+      ;;
     * )
       echo "Unrecognized option: $1" 1>&2
       exit 1
@@ -33,27 +44,43 @@ while [ $# -gt 0 ]; do
   shift
 done
 
+error_and_exit() {
+  echo $1 >&2
+  exit 1
+}
+
+
 if [ ! -d "$inputDir" ]; then
-  echo "missing input directory!"
-  exit 1
+  error_and_exit "missing input directory: $inputDir"
 fi
-
 if [ ! -d "$outputDir" ]; then
-  echo "missing output directory!"
-  exit 1
+  error_and_exit "missing output directory: $outputDir"
+fi
+if [ ! -f "$versionFile" ]; then
+  error_and_exit "missing version file: $versionFile"
+fi
+if [ ! -f "$inputManifest" ]; then
+  error_and_exit "missing input manifest: $inputManifest"
+fi
+if [ -z "$artifactId" ]; then
+  error_and_exit "missing artifactId!"
+fi
+if [ -z "$packaging" ]; then
+  error_and_exit "missing packaging!"
 fi
 
-if [ -f "$versionFile" ]; then
-  version=`cat $versionFile`
-  baseName="${baseName}-${version}"
+# copy the war file to the output directory
+version=`cat $versionFile`
+artifactName="${artifactId}-${version}.${packaging}"
+
+inputArtifact="$inputDir/$artifactName"
+outputArtifact="$outputDir/$artifactName"
+
+if [ ! -f "$inputArtifact" ]; then
+  error_and_exit "can not find artifact: $inputArtifact"
 fi
 
-inputWar=`find $inputDir -name '*.war'`
-outputWar="${outputDir}/${baseName}.war"
-
-echo "Renaming ${inputWar} to ${outputWar}"
-
-cp ${inputWar} ${outputWar}
+cp $inputArtifact $outputArtifact
 
 # copy the manifest to the output directory and process it
 outputManifest=$outputDir/manifest.yml
