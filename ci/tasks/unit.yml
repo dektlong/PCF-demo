@@ -4,18 +4,11 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: java
-    tag: '8'
-
-params:
-  MAVEN_OPTS:
-  MAVEN_CONFIG:
+    repository: brianbyers/concourse-gradle
+    tag: "latest"
 
 inputs:
-  - name: bestretail
+  - name: git-repo
 
 run:
-  path: bestretail/ci/tasks/unit.sh
-  args: [
-    --input-dir, bestretail
-  ]
+  path: git-repo/ci/tasks/unit.sh
