@@ -1,0 +1,7 @@
+---
+applications:
+- name: bestretail
+  host: bestretail-uat
+  instances: 3
+  services: 
+  - bestretail-stream
