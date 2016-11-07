@@ -1,30 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
+set -e
 
-inputDir=
-
-while [ $# -gt 0 ]; do
-  case $1 in
-    -i | --input-dir )
-      inputDir=$2
-      shift
-      ;;
-    * )
-      echo "Unrecognized option: $1" 1>&2
-      exit 1
-      ;;
-  esac
-  shift
-done
-
-error_and_exit() {
-  echo $1 >&2
+get_code="curl -I $CONCOURSE_DEMO_URL 2>/dev/null | head -n 1 | cut -d$' ' -f2"
+status_code=`eval $get_code`
+if [ "$status_code" != "200" ]
+then
+  echo "Expect status code from $CONCOURSE_DEMO_URL as 200, but got $status_code"
   exit 1
-}
-
-if [ ! -d "$inputDir" ]; then
-  error_and_exit "missing input directory: $inputDir"
 fi
-
-cd $inputDir
-
-./mvnw clean verify
