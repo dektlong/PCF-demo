@@ -4,24 +4,19 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: java
-    tag: '8'
+    repository: brianbyers/concourse-gradle
+    tag: "latest"
 
 inputs:
-  - name: bestretail
-  - name: candidate-release
+  - name: git-repo
   - name: version
+  - name: release-candidate
 
 outputs:
-  - name: prepare-final
+  - name: final-dir
 
 run:
-  path: bestretail/ci/tasks/prepare-final.sh
-  args: [
-    --input-dir, candidate-release,
-    --output-dir, prepare-final,
-    --version-file, version/number,
-    --input-manifest, bestretail/manifest.yml,
-    --artifactId, bestretail,
-    --packaging, war
-  ]
+  path: git-repo/ci/tasks/prepare-final.sh
+
+params:
+  base_name:
