@@ -4,26 +4,16 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: java
-    tag: '8'
+    repository: brianbyers/concourse-gradle
+    tag: "latest"
 
-params:
-  MAVEN_OPTS:
-  MAVEN_CONFIG:
 
 inputs:
-  - name: bestretail
+  - name: git-repo
   - name: version
 
 outputs:
-  - name: build
+  - name: artifact-dir
 
 run:
-  path: bestretail/ci/tasks/build.sh
-  args: [
-    --input-dir, bestretail,
-    --output-dir, build,
-    --version-file, version/number,
-    --artifactId, bestretail,
-    --packaging, war
-  ]
+  path: git-repo/ci/tasks/build.sh
