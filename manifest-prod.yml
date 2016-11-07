@@ -1,0 +1,7 @@
+---
+applications:
+- name: bestretail
+  host: bestretail
+  instances: 5
+  services: 
+  - bestretail-stream
